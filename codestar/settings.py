@@ -13,8 +13,9 @@ from pathlib import Path
 import os
 import dj_database_url  # type: ignore
 if os.path.isfile('env.py'):
-    import env
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+    import env  # Import the env module if the file exists
+
+#  Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -22,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p*ebk#=bwuu%#v1mb$i3@@hy7^e%vk7tk)&qp6azs6&9j3_f27'
+SECRET_KEY = (
+    'django-insecure-p*ebk#=bwuu%#v1mb$i3@@hy7^e%vk7tk)&qp6azs6&9j3_f27'
+)
 SECRET_KEY = os.environ.get("KOMANGA")
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -51,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this    
 ]
 
 ROOT_URLCONF = 'codestar.urls'
@@ -99,16 +104,27 @@ CSRF_TRUSTED_ORIGINS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'NumericPasswordValidator'
+        ),
     },
 ]
 
